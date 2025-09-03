@@ -4,6 +4,5 @@
     // Using the class methods
     print $layout->header($conf);
     print $hello->today();
-    $form->signup();
+    $form->signin();
     print $layout->footer($conf);
-    ?>
