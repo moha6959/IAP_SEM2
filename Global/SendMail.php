@@ -18,21 +18,21 @@ try {
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = $conf['smtp_host'];                     //Set the SMTP server to send through
+    $mail->Host       = $conf['smtp.gmail.com'];                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = $conf['smtp_user'];                     //SMTP username
-    $mail->Password   = $conf['smtp_pass'];                     //SMTP password
+    $mail->Username   = $conf['mohamedek.yussuf@strathmore.edu'];                     //SMTP username
+    $mail->Password   = $conf['mgzb ownb bpsx hppp'];                     //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = $conf['smtp_port'];                     //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = $conf['465'];                     //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom($mailCnt['mail_from'], $mailCnt['name_from']);
-    $mail->addAddress($mailCnt['mail_to'], $mailCnt['name_to']);     //Add a recipient
+    $mail->setFrom($mailCnt['mohamedek.yussuf@strathmore.edu'], $mailCnt['Mohamedek']);
+    $mail->addAddress($mailCnt['issa.abdullahi@strathmore.edu'], $mailCnt['issa']);     //Add a recipient
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = $mailCnt['subject'];
-    $mail->Body    = $mailCnt['body'];
+    $mail->Subject = $mailCnt['test'];
+    $mail->Body    = $mailCnt['testing '];
 
     $mail->send();
     echo 'Message has been sent';
