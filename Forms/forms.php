@@ -1,4 +1,9 @@
 <?php
+// Include the sendmail class
+require_once '../Global/sendmail.php';
+// Start session to store verification tokens
+session_start();
+
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['signup'])) {
@@ -7,8 +12,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
         
-        // Validate and process the data (in a real application)
-        echo "<div class='alert alert-success mt-3'>Signup successful! (In real app, this would save to database)</div>";
+        // Validate email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "<div class='alert alert-danger mt-3'>Invalid email format</div>";
+        } else {
+            // Generate verification token
+            $verificationToken = bin2hex(random_bytes(32));
+            
+            // Store token in session (in a real app, store in database)
+            $_SESSION['verification_tokens'][$email] = [
+                'token' => $verificationToken,
+                'name' => $name,
+                'expires' => time() + (24 * 60 * 60) // 24 hours from now
+            ];
+            
+            // Send verification email
+            $mailer = new SendMail();
+            $emailSent = $mailer->sendVerificationEmail($email, $name, $verificationToken);
+            
+            if ($emailSent) {
+                echo "<div class='alert alert-success mt-3'>Signup successful! Please check your email to verify your account.</div>";
+            } else {
+                echo "<div class='alert alert-danger mt-3'>There was an error sending the verification email. Please try again.</div>";
+            }
+        }
     }
     
     if (isset($_POST['signin'])) {
