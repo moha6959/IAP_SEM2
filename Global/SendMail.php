@@ -10,10 +10,10 @@ require '../plugins/PHPMailer/vendor/autoload.php';
 // Creating a class
 class SendMail {
     public function sendVerificationEmail($userEmail, $userName, $verificationToken) {
-        // Configuration - update with your actual credentials
+        // Configuration for SMTP
         $smtpHost = 'smtp.gmail.com';
-        $smtpUsername = 'mohamedek.yussuf@strathmore.edu'; // Your email
-        $smtpPassword = 'mgzb ownb bpsx hppp'; // Your app password
+        $smtpUsername = 'mohamedek.yussuf@strathmore.edu'; 
+        $smtpPassword = 'mgzb ownb bpsx hppp'; 
         $smtpPort = 465;
         
         // Create an instance; passing `true` enables exceptions
@@ -21,21 +21,21 @@ class SendMail {
 
         try {
             // Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output
-            $mail->isSMTP(); // Send using SMTP
-            $mail->Host       = $smtpHost; // Set the SMTP server to send through
-            $mail->SMTPAuth   = true; // Enable SMTP authentication
-            $mail->Username   = $smtpUsername; // SMTP username
-            $mail->Password   = $smtpPassword; // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Enable implicit TLS encryption
-            $mail->Port       = $smtpPort; // TCP port to connect to
+            $mail->SMTPDebug = SMTP::DEBUG_OFF; 
+            $mail->isSMTP(); 
+            $mail->Host       = $smtpHost; 
+            $mail->SMTPAuth   = true; 
+            $mail->Username   = $smtpUsername; 
+            $mail->Password   = $smtpPassword;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
+            $mail->Port       = $smtpPort; 
 
             // Recipients
             $mail->setFrom('noreply@dekshostel.com', 'Dekshostel');
-            $mail->addAddress($userEmail, $userName); // Add a recipient
+            $mail->addAddress($userEmail, $userName); 
 
             // Content
-            $mail->isHTML(true); // Set email format to HTML
+            $mail->isHTML(true); 
             $mail->Subject = 'Welcome to Dekshostel - Account Verification';
             
             // Email body with verification link

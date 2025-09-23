@@ -2,21 +2,21 @@
 session_start();
 require_once 'db_connect.php';
 
-// Get form data
+//gets data from form
 $email = $_POST['email'];
 $name = $_POST['name'];
 $password = $_POST['password'];
 
-// Generate verification token (URL-safe)
+
 $token = bin2hex(random_bytes(50));
 $expires = date('Y-m-d H:i:s', strtotime('+24 hours'));
 
-// DEBUG: Show what we're doing
+// DEBUG
 error_log("REGISTRATION: Email=$email, Name=$name");
 error_log("REGISTRATION: Token generated: $token");
 
 try {
-    // 1. First insert user into users table
+    
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $userStmt = $pdo->prepare("INSERT INTO users (email, name, password) VALUES (?, ?, ?)");
     

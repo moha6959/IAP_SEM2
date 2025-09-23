@@ -5,7 +5,7 @@ $conf['site_timezone'] = 'Africa/Nairobi';
 // Site information
 $conf['site_name'] = 'Deks Hostels';
 $conf['site_url'] = 'http://localhost/IAP_SEM2-1/';
-$conf['admin_email'] = 'admin@icsbacademy.com';
+$conf['admin_email'] = 'mohamedek.yussuf@strathmore.edu';
 
 // Site language
 $conf['site_lang'] = 'en';
@@ -15,10 +15,10 @@ $conf['db_type'] = 'pdo';
 $conf['db_host'] = 'localhost';
 $conf['db_user'] = 'root';
 $conf['db_pass'] = '';
-$conf['db_name'] = 'tol';
+$conf['db_name'] = 'deks_hostels';
 
 // Email configuration
-$conf['mail_type'] = 'smtp'; // Options: 'smtp' or 'mail'
+$conf['mail_type'] = 'smtp'; 
 $conf['smtp_host'] = 'smtp.gmail.com';
 $conf['smtp_user'] = 'mohamedekaden576@gmail.com';
 $conf['smtp_pass'] = '';

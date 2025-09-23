@@ -16,7 +16,7 @@ echo "<!DOCTYPE html><html><head>
 if (isset($_GET['token'])) {
     $token = trim($_GET['token']);
 
-    // 🔍 Debug: get the last token saved in DB (safe fetch)
+    // 🔍 Debug: get the last token saved in Db
     $stmt = $pdo->query("SELECT email, token, expires_at FROM verification_tokens ORDER BY id DESC LIMIT 1");
     $last = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -31,7 +31,7 @@ if (isset($_GET['token'])) {
     }
     echo "</pre>";
 
-    // ✅ Now check token normally
+    //  Now check token normally
     $stmt = $pdo->prepare("SELECT email, expires_at FROM verification_tokens WHERE token = ?");
     $stmt->execute([$token]);
     $tokenData = $stmt->fetch(PDO::FETCH_ASSOC);

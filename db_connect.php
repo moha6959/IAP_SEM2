@@ -1,9 +1,9 @@
 <?php
-// Database configuration
-$host = 'localhost:3307'; // Your database host
-$dbname = 'deks_hostels'; // Your database name
-$username = 'root'; // Your database username
-$password = 'Dek190134'; // Your database password
+
+$host = 'localhost:3307'; 
+$dbname = 'deks_hostels'; 
+$username = 'root'; 
+$password = 'Dek190134'; 
 
 try {
     // Create PDO instance

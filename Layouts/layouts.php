@@ -1,6 +1,6 @@
 <?php
 class Layouts {
-    public function header($conf) {
+    public function header($conf) {//generates html head section with meta tags and css links
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
@@ -16,7 +16,7 @@ class Layouts {
    </head>
 <?php
     }
-    public function navbar($conf) {
+    public function navbar($conf) {//creates a navigation bar with menu items
 ?>
    <body>
 
