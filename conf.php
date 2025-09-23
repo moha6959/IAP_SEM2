@@ -3,8 +3,8 @@
 $conf['site_timezone'] = 'Africa/Nairobi';
 
 // Site information
-$conf['site_name'] = 'ICS B Academy';
-$conf['site_url'] = 'http://localhost/tol';
+$conf['site_name'] = 'Deks Hostels';
+$conf['site_url'] = 'http://localhost/IAP_SEM2-1/';
 $conf['admin_email'] = 'admin@icsbacademy.com';
 
 // Site language
