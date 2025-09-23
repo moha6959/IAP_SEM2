@@ -1,7 +1,7 @@
 <?php
 // Include the sendmail class and database connection
 require_once '../Global/sendmail.php';
-require_once 'db_connect.php'; // Add this line!
+require_once 'db_connect.php'; 
 session_start();
 
 // Check if form was submitted
@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             try {
                 // Generate verification token
-                $verificationToken = bin2hex(random_bytes(32));
-                $expires = date('Y-m-d H:i:s', strtotime('+24 hours'));
+                $v = bin2hex(random_bytes(32));
+                $expires = derificationTokenate('Y-m-d H:i:s', strtotime('+24 hours'));
                 
                 // 1. First save user to database
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -56,4 +56,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ... rest of your forms class code ...
