@@ -1,7 +1,7 @@
 <?php
 // Include the sendmail class and database connection
 require_once '../Global/sendmail.php';
-require_once '../db_connect.php'; // Database connection
+require_once '../db_connect.php'; 
 session_start();
 
 // Check if form was submitted
@@ -17,35 +17,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<div class='alert alert-danger mt-3'>Invalid email format</div>";
         } else {
             try {
-                // Generate verification token
+                
                 $verificationToken = bin2hex(random_bytes(32));
                 $expires = date('Y-m-d H:i:s', strtotime('+24 hours'));
                 
-                // 1. First save user to database
+                
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $userStmt = $pdo->prepare("INSERT INTO users (email, name, password) VALUES (?, ?, ?)");
                 $userStmt->execute([$email, $name, $hashedPassword]);
                 
-                // 2. Save token to database
+                
                 $tokenStmt = $pdo->prepare("INSERT INTO verification_tokens (email, token, expires_at) VALUES (?, ?, ?)");
                 $tokenStmt->execute([$email, $verificationToken, $expires]);
                 
-                // Send verification email
+                
                 $mailer = new SendMail();
                 
-                // Make sure sendVerificationEmail uses the correct URL format
+            
                 $emailSent = $mailer->sendVerificationEmail($email, $name, $verificationToken);
                 
                 if ($emailSent) {
                     echo "<div class='alert alert-success mt-3'>Signup successful! Please check your email to verify your account.</div>";
-                    // Clear form
+                    
                     echo "<script>document.querySelector('form').reset();</script>";
                 } else {
                     echo "<div class='alert alert-danger mt-3'>There was an error sending the verification email. Please try again.</div>";
                 }
                 
             } catch (PDOException $e) {
-                if ($e->getCode() == 23000) { // Duplicate email
+                if ($e->getCode() == 23000) { 
                     echo "<div class='alert alert-danger mt-3'>Email already exists. Please use a different email.</div>";
                 } else {
                     echo "<div class='alert alert-danger mt-3'>Registration error. Please try again.</div>";
@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     if (isset($_POST['signin'])) {
-        // Process signin form
+        
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
         
         try {
-            // Check if user exists and is verified
+            
             $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? AND is_verified = TRUE");
             $stmt->execute([$email]);
             $user = $stmt->fetch();
@@ -503,7 +503,7 @@ function togglePassword(inputId) {
     }
 }
 
-// Create an instance of the forms class
+
 $forms = new forms();
 
 // Check which form to display based on URL parameter
