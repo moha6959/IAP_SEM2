@@ -7,16 +7,16 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require '../plugins/PHPMailer/vendor/autoload.php';
 
-// Creating a class
+
 class SendMail {
     public function sendVerificationEmail($userEmail, $userName, $verificationToken) {
-        // Configuration for SMTP
+        
         $smtpHost = 'smtp.gmail.com';
         $smtpUsername = 'mohamedek.yussuf@strathmore.edu'; 
         $smtpPassword = 'mgzb ownb bpsx hppp'; 
         $smtpPort = 465;
         
-        // Create an instance; passing `true` enables exceptions
+        
         $mail = new PHPMailer(true);
 
         try {
@@ -30,7 +30,7 @@ class SendMail {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
             $mail->Port       = $smtpPort; 
 
-            // Recipients
+            
             $mail->setFrom('noreply@dekshostel.com', 'Dekshostel');
             $mail->addAddress($userEmail, $userName); 
 
@@ -38,7 +38,7 @@ class SendMail {
             $mail->isHTML(true); 
             $mail->Subject = 'Welcome to Dekshostel - Account Verification';
             
-            // Email body with verification link
+            
             $verificationLink = "http://localhost/IAP_SEM2-1/verify.php?token=" . $verificationToken;
             
             $mail->Body = "
@@ -50,7 +50,7 @@ class SendMail {
                 <p>Regards,<br>Systems Admin<br>Dekshostel</p>
             ";
             
-            // Plain text version for non-HTML email clients
+            
             $mail->AltBody = "Welcome to Dekshostel Account Verification\n\nHello $userName,\n\nYou requested an account on Dekshostel.\n\nIn order to use this account you need to visit the following link to complete the registration process: $verificationLink\n\nRegards,\nSystems Admin\nDekshostel";
 
             $mail->send();
